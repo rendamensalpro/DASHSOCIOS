@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Unificado - JFC Capital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* --- General Styles & Variables --- */
+        :root {
+            --bg-color: #1a1a2e;
+            --card-color: #16213e;
+            --primary-color: #0f3460;
+            --secondary-color: #e94560;
+            --font-color: #e0e0e0;
+            --green-color: #2ecc71;
+            --orange-color: #f39c12;
+            --red-color: #e74c3c;
+            --blue-color: #3498db;
+            --accent-color-1: #00d1b2; /* Verde-água do primeiro dash */
+            --highlight-orange: #ff8c00; /* Laranja mais vibrante para destaque */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--font-color);
+            padding: 20px;
+        }
+
+        /* --- Header --- */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 .logo {
+            font-weight: bold;
+            color: var(--blue-color);
+        }
+        
+        .header h1 i {
+            color: var(--green-color);
+        }
+
+        /* --- Section Titles --- */
+        .section-title {
+            font-size: 2rem;
+            color: var(--font-color);
+            text-align: center;
+            margin: 50px 0 30px 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        /* --- Main Dashboard Layout --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        /* Grid para os 3 settings */
+        .settings-grid {
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* --- Card Styles --- */
+        .card {
+            background-color: var(--card-color);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            color: var(--secondary-color);
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-content ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ffffff1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .card-content ul li:last-child {
+            border-bottom: none;
+        }
+        
+        /* --- ESTILOS PARA O NOVO CARD DE ESTRATÉGIA --- */
+        .card-content p.strategy-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #c0c0c0;
+            margin-bottom: 15px;
+        }
+        .card-content ul.strategy-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ffffff1a;
+            display: flex;
+            justify-content: flex-start; /* Alinha à esquerda */
+            align-items: center;
+            font-size: 1.05rem;
+            gap: 12px;
+        }
+        .card-content ul.strategy-list li i {
+            color: var(--green-color);
+            width: 20px;
+            text-align: center;
+        }
+        .card-content ul.strategy-list li:last-child {
+            border-bottom: none;
+        }
+        /* --- FIM DOS ESTILOS DE ESTRATÉGIA --- */
+
+
+        .card-content span.label {
+            font-weight: 500;
+            color: #a0a0a0;
+        }
+
+        .card-content span.value, .metric-value {
+            font-weight: bold;
+        }
+
+        /* Estilo para o R$ na lista de distribuição */
+        .card-content ul li small {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .value.green, .metric-value.green { color: var(--green-color); }
+        .value.orange, .metric-value.orange { color: var(--orange-color); }
+        .value.red, .metric-value.red { color: var(--red-color); }
+        .value.blue, .metric-value.blue { color: var(--blue-color); }
+
+        .metric-group {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            text-transform: uppercase;
+        }
+        
+        .metric-value {
+            font-size: 2.2rem;
+            display: block;
+        }
+        
+        /* Estilo para Inputs */
+        #dollar-rate-input, .setting-input {
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+            background: #1f2a47;
+            color: var(--font-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 5px;
+            box-sizing: border-box;
+            font-weight: bold;
+            -moz-appearance: textfield; /* Remove setas no Firefox */
+        }
+        #dollar-rate-input {
+            font-size: 2.2rem; /* Mantém o de dólar um pouco maior */
+        }
+        .setting-input {
+             margin-top: 10px;
+        }
+        
+        #dollar-rate-input::-webkit-outer-spin-button,
+        #dollar-rate-input::-webkit-inner-spin-button {
+            -webkit-appearance: none; /* Remove setas no Chrome/Safari */
+            margin: 0;
+        }
+        
+        .settings-grid .card { /* Override card padding para inputs */
+             padding: 20px;
+        }
+        .settings-grid .metric-label {
+            text-align: left;
+            width: 100%;
+            display: block;
+        }
+
+        .metric-sub-value {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--font-color);
+            margin-top: 5px;
+            display: block; /* Garante que o R$ fique abaixo do $ */
+        }
+        
+        /* --- ESTILOS DE DESTAQUE --- */
+        @keyframes pulse-glow-orange {
+            0% {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 5px rgba(243, 156, 18, 0.2);
+            }
+            50% {
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--orange-color);
+            }
+            100% {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 5px rgba(243, 156, 18, 0.2);
+            }
+        }
+
+        .card--highlight {
+            /* Efeito de Destaque */
+            background: radial-gradient(circle, #2a3a5e 0%, var(--card-color) 90%);
+            
+            /* Animação de Pulso/Glow */
+            animation: pulse-glow-orange 3s infinite ease-in-out;
+            
+            /* Garante que fique "acima" dos outros */
+            position: relative; 
+            z-index: 10;
+        }
+
+        .card--highlight .card-title {
+            font-size: 1.4rem; /* Aumentado de 1.2rem */
+            justify-content: center; /* Centraliza o título */
+        }
+        
+        .card--highlight .metric-label {
+            font-size: 1rem; /* Aumentado de 0.9rem */
+            letter-spacing: 1px;
+        }
+        
+        .card--highlight .metric-value {
+            font-size: 3.2rem; /* Aumentado de 2.2rem */
+            text-shadow: 0 0 15px var(--blue-color); /* Efeito de 'neon' no valor $ */
+        }
+        
+        .card--highlight .metric-sub-value {
+            font-size: 1.8rem; /* Aumentado de 1.5rem */
+            color: var(--font-color);
+            text-shadow: 0 0 10px rgba(224, 224, 224, 0.5); /* Efeito de brilho no R$ */
+        }
+        /* --- FIM DOS ESTILOS DE DESTAQUE --- */
+
+        /* --- NOVO CARD DE GANHOS DO DIA --- */
+        .card--daily-gain {
+            border-left-color: var(--highlight-orange);
+            background-color: #1f2a47; /* Um pouco mais claro que o card normal */
+        }
+        .card--daily-gain .card-title {
+            color: var(--highlight-orange);
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .card--daily-gain .card-title i {
+             color: var(--highlight-orange);
+        }
+        .card--daily-gain ul li {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr; /* Nome, $, R$ */
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 0;
+            font-size: 1.05rem;
+        }
+        .card--daily-gain ul li.total-row {
+            background-color: #ffcc00; /* Amarelo ouro */
+            color: #000; /* Texto preto para contraste */
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 15px 10px;
+            margin-top: 15px;
+            border: 2px solid var(--highlight-orange); /* Borda laranja */
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.7); /* Brilho amarelo */
+        }
+        .card--daily-gain ul li span.label {
+            color: #d0d0d0; /* cor para os labels dentro do card */
+            font-weight: 500;
+        }
+        .card--daily-gain ul li.total-row span.label {
+            color: #000; /* Label total em preto */
+        }
+        .card--daily-gain ul li span.value-usd,
+        .card--daily-gain ul li span.value-brl {
+            font-weight: bold;
+            color: var(--blue-color); /* Destaque para valores em USD */
+            text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        .card--daily-gain ul li span.value-brl {
+            color: var(--green-color); /* Destaque para valores em BRL */
+            text-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+        }
+        .card--daily-gain ul li.total-row span.value-usd,
+        .card--daily-gain ul li.total-row span.value-brl {
+             color: #000; /* Valores totais em preto */
+             text-shadow: none;
+             font-size: 1.1rem;
+        }
+
+
+        /* --- Table Section --- */
+        .table-container {
+            background-color: var(--card-color);
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+        
+        .table-container-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ffffff1a;
+        }
+
+        thead th {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #1f2a47;
+        }
+
+        tbody tr:hover {
+            background-color: #31353d;
+        }
+        
+        td:first-child, th:first-child {
+            font-weight: bold;
+        }
+        
+        td.positive {
+            color: var(--green-color);
+            font-weight: bold;
+        }
+        td.negative {
+            color: var(--red-color);
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 2rem; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .metric-value, #dollar-rate-input { font-size: 2rem; }
+            .setting-input { font-size: 1.8rem; }
+            .table-container-title { font-size: 1.3rem; }
+            .section-title { font-size: 1.5rem; }
+            
+            .card--highlight .metric-value { font-size: 2.8rem; }
+            .card--highlight .metric-sub-value { font-size: 1.5rem; } /* Ajuste mobile */
+
+            .card--daily-gain ul li {
+                grid-template-columns: 1fr auto auto; /* Ajuste para mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .header h1 { font-size: 1.8rem; gap: 10px; }
+            .card { padding: 20px; }
+            .table-container { padding: 15px; }
+            th, td { padding: 10px 12px; font-size: 0.95rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>
+            <i class="fas fa-chart-pie"></i>
+            <div>Dashboard Unificado <span class="logo">JFC Capital</span></div>
+        </h1>
+    </header>
+
+    <main>
+        <h2 class="section-title">Apuração Atual (27/10)</h2>
+        <div class="dashboard-grid">
+            
+            <div class="card" style="border-left-color: var(--accent-color-1);">
+                <h2 class="card-title" style="--secondary-color: var(--accent-color-1);"><i class="fas fa-dollar-sign"></i>Cotação Manual</h2>
+                <div class="metric-group">
+                    <span class="metric-label">Valor do Dólar (R$)</span>
+                    <input type="number" id="dollar-rate-input" value="5.39" step="0.01" onchange="updateCards()">
+                </div>
+            </div>
+
+            <div class="card" style="border-left-color: var(--accent-color-1);">
+                <h2 class="card-title" style="--secondary-color: var(--accent-color-1);"><i class="fas fa-piggy-bank"></i>Saldo Total RoboForex</h2>
+                <div class="metric-group">
+                    <span class="metric-label">Saldo em Dólar</span>
+                    <span class="metric-value" data-target="3938.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="3938.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left-color: var(--orange-color);">
+                <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-calculator"></i>Excedente Pró Labore</h2>
+                <div class="metric-group">
+                    <span class="metric-label">Lucro Apurado (USD)</span>
+                    <span class="metric-value" data-target="938.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="938.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-sub-value" style="font-size: 1rem; color: #a0a0a0; margin-top: 10px;">Base: $3.938,00 (Total) - $3.000,00 (Mínimo)</span>
+                </div>
+            </div>
+
+            <div class="card" style="border-left-color: var(--orange-color);">
+                <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-chart-pie"></i>Distribuição (50/50)</h2>
+                <div class="metric-group" style="margin-bottom: 20px;">
+                    <span class="metric-label">Reinvestimento (50%)</span>
+                    <span class="metric-value green" data-target="469.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="469.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                </div>
+                 <div class="metric-group">
+                    <span class="metric-label">Saque Sócios (50%)</span>
+                    <span class="metric-value blue" data-target="469.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="469.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                </div>
+            </div>
+
+            <div class="card card--highlight" style="border-left-color: var(--orange-color);">
+                <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-user-friends"></i>Pró Labore por Sócio (3)</h2>
+                <div class="metric-group">
+                    <span class="metric-label">Valor por Sócio (USD)</span>
+                    <span class="metric-value" data-target="156.33">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="156.33" data-calculate="usd-to-brl">R$ 0.00</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left-color: var(--green-color);">
+                <h2 class="card-title" style="--secondary-color: var(--green-color);">
+                    <i class="fas fa-sitemap"></i>Distribuição de Capital (Base)
+                </h2>
+                <div class="card-content">
+                    <ul>
+                        <li><span class="label">ROBO CANADA INT</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">ROBO CANADA SLOW</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">ROBO CANADA 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">COPIA RO ROBO 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li style="background-color: #ffffff10; font-weight: bold;"><span class="label">Total Alocado</span> <span><span class="value green" data-target="3000">$0</span> <small data-target="3000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Ganho Diário (27/Out)</h2>
+        <div class="dashboard-grid">
+            <div class="card card--daily-gain">
+                <h2 class="card-title"><i class="fas fa-money-bill-wave"></i>Total de Ganho no Dia</h2>
+                <div class="card-content">
+                    <ul>
+                        <li>
+                            <span class="label">ROBO RENDE MAIS</span>
+                            <span class="value-usd">$ -</span>
+                            <span class="value-brl">R$ -</span>
+                        </li>
+                        <li>
+                            <span class="label">ROBO CANADA INTER</span>
+                            <span class="value-usd" data-target="15.06">$ 0.00</span>
+                            <span class="value-brl" data-target="15.06" data-calculate="usd-to-brl">R$ 0.00</span>
+                        </li>
+                        <li>
+                            <span class="label">ROBO SLOW</span>
+                            <span class="value-usd" data-target="9.87">$ 0.00</span>
+                            <span class="value-brl" data-target="9.87" data-calculate="usd-to-brl">R$ 0.00</span>
+                        </li>
+                        <li>
+                            <span class="label">ROBO 10%</span>
+                            <span class="value-usd" data-target="19.60">$ 0.00</span>
+                            <span class="value-brl" data-target="19.60" data-calculate="usd-to-brl">R$ 0.00</span>
+                        </li>
+                        <li>
+                            <span class="label">CONTA COPIADA</span>
+                            <span class="value-usd" data-target="19.97">$ 0.00</span>
+                            <span class="value-brl" data-target="19.97" data-calculate="usd-to-brl">R$ 0.00</span>
+                        </li>
+                        <li class="total-row">
+                            <span class="label">TOTAL</span>
+                            <span class="value-usd" data-target="64.50">$ 0.00</span>
+                            <span class="value-brl" data-target="64.50" data-calculate="usd-to-brl">R$ 0.00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Projeto e Estratégia JFC 2025</h2>
+        <div class="dashboard-grid">
+            <div class="card" style="border-left-color: var(--green-color);">
+                <h2 class="card-title" style="--secondary-color: var(--green-color);">
+                    <i class="fas fa-sitemap"></i>Distribuição de Capital (Base)
+                </h2>
+                <div class="card-content">
+                    <ul>
+                        <li><span class="label">ROBO CANADA INT</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">ROBO CANADA SLOW</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">ROBO CANADA 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">COPIA RO ROBO 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li style="background-color: #ffffff10; font-weight: bold;"><span class="label">Total Alocado</span> <span><span class="value green" data-target="3000">$0</span> <small data-target="3000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left-color: var(--green-color);">
+                <h2 class="card-title" style="--secondary-color: var(--green-color);">
+                    <i class="fas fa-cogs"></i>
+                    Estratégia da Projeção
+                </h2>
+                <div class="card-content">
+                    <p class="strategy-description">
+                        A simulação da projeção de 36 meses segue a seguinte estratégia de juros compostos:
+                    </p>
+                    <ul class="strategy-list">
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <span><strong>Rendimento:</strong> 15% ao mês sobre o saldo.</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-piggy-bank"></i>
+                            <span><strong>Reinvestimento (Aporte):</strong> 50% do ganho mensal.</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-hand-holding-usd" style="color: var(--blue-color);"></i>
+                            <span><strong>Saque (Pró-Labore):</strong> 50% do ganho mensal.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <h2 class="section-title">Parâmetros da Projeção (36 Meses)</h2>
+        <div class="dashboard-grid settings-grid">
+            <div class="card">
+                <span class="metric-label">Saldo Inicial (R$)</span>
+                <input type="number" id="proj-saldo-inicial" class="setting-input" value="10000" step="100" onchange="generateProjectionTable()">
+            </div>
+            <div class="card">
+                <span class="metric-label">Rendimento Mensal (%)</span>
+                <input type="number" id="proj-rendimento" class="setting-input" value="15" step="1" onchange="generateProjectionTable()">
+            </div>
+            <div class="card">
+                <span class="metric-label">Número de Sócios</span>
+                <input type="number" id="proj-socios" class="setting-input" value="3" step="1" onchange="generateProjectionTable()">
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h2 class="table-container-title">
+                <i class="fas fa-calendar-alt"></i>Projeção Mensal - Pró Labore JFC (36 Meses)
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mês</th>
+                        <th>Data</th>
+                        <th>Saldo Inicial</th>
+                        <th id="th-rendimento">Rendimento (15%)</th>
+                        <th>Reinvestido (50%)</th>
+                        <th>Saque Robô (50%)</th>
+                        <th id="th-socios">Salário p/ Sócio (3)</th>
+                        <th>Saldo Final</th>
+                    </tr>
+                </thead>
+                <tbody id="projection-tbody">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // --- FUNÇÕES DE FORMATAÇÃO E ANIMAÇÃO (Cards) ---
+
+        const formatNumber = (value, element) => {
+            // Salva o placeholder (texto original) se for a primeira vez
+            if (!element.dataset.placeholder) {
+                 element.dataset.placeholder = element.textContent || '';
+            }
+            const placeholder = element.dataset.placeholder;
+            
+            const calculation = element.getAttribute('data-calculate');
+            
+            // Decide o formato com base no placeholder
+            const isSmallBRL = placeholder.includes('(R$');
+            const isUSD = placeholder.includes('$');
+            // é BRL se for um cálculo USD->BRL OU se o placeholder tiver R$ (e não for (R$))
+            const isBRL = (calculation === 'usd-to-brl') || (!isSmallBRL && !isUSD && placeholder.includes('R$'));
+
+            const targetString = element.getAttribute('data-target') || '0';
+            const isInteger = !targetString.includes('.');
+
+            let options = {};
+
+            // Se for qualquer tipo de moeda, usa 2 casas decimais
+            if (isBRL || isUSD || isSmallBRL || !isInteger) {
+                options.minimumFractionDigits = 2;
+                options.maximumFractionDigits = 2;
+            } else {
+                options.minimumFractionDigits = 0;
+                options.maximumFractionDigits = 0;
+            }
+
+            let formatted = value.toLocaleString('pt-BR', options);
+            
+            // Ordem de prioridade para evitar bugs
+            if (isSmallBRL) return `(R$ ${formatted})`;
+            if (isBRL) return `R$ ${formatted}`;
+            if (isUSD) return `$ ${formatted}`;
+            
+            return formatted; // Para números sem símbolo
+        };
+
+        const animateValue = (element, start, end, duration) => {
+            // Armazena o texto original (ex: "R$ 0.00") no 'dataset.placeholder'
+            if (!element.dataset.placeholder) {
+                 element.dataset.placeholder = element.textContent || '';
+            }
+            
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentValue = progress * (end - start) + start;
+                element.innerHTML = formatNumber(currentValue, element);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    element.innerHTML = formatNumber(end, element);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+        
+        // --- FUNÇÃO PARA ATUALIZAR OS CARDS (Apuração Atual + Ganho Diário) ---
+
+        function updateCards() {
+            const dollarRate = parseFloat(document.getElementById('dollar-rate-input').value) || 0;
+            const counters = document.querySelectorAll('[data-target]');
+            const animationDuration = 1000; // Duração da animação
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const calculation = counter.getAttribute('data-calculate');
+                
+                let endValue = target; // Valor final padrão
+
+                // Se o elemento tiver 'data-calculate', recalcula o valor final
+                if (calculation === 'usd-to-brl') {
+                    endValue = target * dollarRate;
+                }
+                
+                let startValue = 0;
+                // Tenta pegar o valor atual (já formatado) para uma animação suave
+                try {
+                     // Remove R$, $, (), espaços, e troca vírgula por ponto
+                     const cleanText = counter.textContent.replace(/[R$() ]/g, '').replace(/\./g, '').replace(',', '.');
+                     startValue = parseFloat(cleanText) || 0;
+                     if(isNaN(startValue)) startValue = 0;
+                } catch(e) {
+                    startValue = 0;
+                }
+                
+                animateValue(counter, startValue, endValue, animationDuration);
+            });
+        }
+        
+        // --- FUNÇÃO PARA GERAR A TABELA DE PROJEÇÃO (36 Meses) ---
+        
+        function generateProjectionTable() {
+            const projectionBody = document.getElementById('projection-tbody');
+            if (!projectionBody) return; // Safety check
+            projectionBody.innerHTML = ''; // Limpa a tabela
+
+            // --- LÊ PARÂMETROS DOS INPUTS ---
+            let saldoInicial = parseFloat(document.getElementById('proj-saldo-inicial').value) || 10000;
+            const rendimentoPerc = (parseFloat(document.getElementById('proj-rendimento').value) || 15) / 100;
+            const numSocios = parseInt(document.getElementById('proj-socios').value) || 3;
+            const numMeses = 36; // **ALTERADO PARA 36 MESES**
+            const reinvestPerc = 0.50; // 50%
+            // ---------------------------------
+
+            // Atualiza headers da tabela
+            document.getElementById('th-rendimento').textContent = `Rendimento (${(rendimentoPerc * 100).toFixed(0)}%)`;
+            document.getElementById('th-socios').textContent = `Salário p/ Sócio (${numSocios})`;
+
+            let currentDate = new Date('2025-11-15T12:00:00'); // Data inicial
+            let saldo = saldoInicial;
+
+            const formatBRL = (value) => {
+                 return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+            };
+
+            for (let i = 1; i <= numMeses; i++) {
+                // Lógica da nova planilha
+                const rendimento = saldo * rendimentoPerc;
+                const reinvestido = rendimento * reinvestPerc; // "Aporte 50%" da imagem
+                const saqueRobo = rendimento * (1 - reinvestPerc); // "SAQUE 50% DO ROBO"
+                const salarioSocio = numSocios > 0 ? (saqueRobo / numSocios) : 0; // "SAQUE SÓCIOS"
+                
+                // Lógica de Saldo Final (Saldo Inicial + Reinvestido)
+                const saldoFinal = saldo + reinvestido;
+                
+                const formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                
+                const row = `
+                    <tr>
+                        <td>${i}</td>
+                        <td>${formattedDate}</td>
+                        <td>${formatBRL(saldo)}</td>
+                        <td>${formatBRL(rendimento)}</td>
+                        <td>${formatBRL(reinvestido)}</td>
+                        <td>${formatBRL(saqueRobo)}</td>
+                        <td class="positive">${formatBRL(salarioSocio)}</td>
+                        <td style="font-weight: bold;">${formatBRL(saldoFinal)}</td>
+                    </tr>
+                `;
+                
+                projectionBody.innerHTML += row;
+                
+                saldo = saldoFinal; // Prepara o saldo para o próximo mês
+                currentDate.setMonth(currentDate.getMonth() + 1); // Avança um mês
+            }
+        }
+
+        // --- INICIALIZAÇÃO DO DASHBOARD ---
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            generateProjectionTable(); // Gera a tabela de projeção com os defaults
+            updateCards(); // Calcula e anima os cards de apuração e ganhos diários
+        });
+    </script>
+
+</body>
+</html>
