@@ -410,8 +410,8 @@
             .table-container-title { font-size: 1.3rem; }
             .section-title { font-size: 1.5rem; }
             
-            .card--highlight .metric-value { font-size: 2.8rem; }
-            .card--highlight .metric-sub-value { font-size: 1.5rem; } /* Ajuste mobile */
+            .card--highlight .metric-value { font-size: 2.5rem; }
+            .card--highlight .metric-sub-value { font-size: 1.4rem; } 
 
             .card--daily-gain ul li {
                 grid-template-columns: 1fr auto auto; /* Ajuste para mobile */
@@ -420,10 +420,29 @@
 
         @media (max-width: 480px) {
             body { padding: 10px; }
-            .header h1 { font-size: 1.8rem; gap: 10px; }
+            .header h1 { font-size: 1.6rem; gap: 10px; }
+            .section-title { font-size: 1.3rem; }
             .card { padding: 20px; }
+            .card-title { font-size: 1.1rem; }
+            
+            .metric-value { font-size: 1.8rem; }
+            #dollar-rate-input { font-size: 1.8rem; }
+            .setting-input { font-size: 1.5rem; }
+            
+            .card--highlight .metric-value { font-size: 2.2rem; }
+            .card--highlight .metric-sub-value { font-size: 1.2rem; } 
+            
+            .card--daily-gain ul li { 
+                font-size: 0.9rem; 
+                grid-template-columns: 1fr auto auto; 
+                gap: 5px; 
+            }
+            .card--daily-gain ul li.total-row {
+                font-size: 1rem;
+            }
+
             .table-container { padding: 15px; }
-            th, td { padding: 10px 12px; font-size: 0.95rem; }
+            th, td { padding: 8px 10px; font-size: 0.9rem; }
         }
 
     </style>
@@ -491,21 +510,7 @@
                 </div>
             </div>
             
-            <div class="card" style="border-left-color: var(--green-color);">
-                <h2 class="card-title" style="--secondary-color: var(--green-color);">
-                    <i class="fas fa-sitemap"></i>Distribuição de Capital (Base)
-                </h2>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="label">ROBO CANADA INT</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
-                        <li><span class="label">ROBO CANADA SLOW</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
-                        <li><span class="label">ROBO CANADA 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
-                        <li><span class="label">COPIA RO ROBO 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
-                        <li style="background-color: #ffffff10; font-weight: bold;"><span class="label">Total Alocado</span> <span><span class="value green" data-target="3000">$0</span> <small data-target="3000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
-                    </ul>
-                </div>
             </div>
-        </div>
 
         <h2 class="section-title">Ganho Diário (27/Out)</h2>
         <div class="dashboard-grid">
