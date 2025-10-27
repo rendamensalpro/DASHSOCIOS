@@ -438,7 +438,7 @@
     </header>
 
     <main>
-        <h2 class="section-title">Apuração Atual (27/10)</h2>
+        <h2 class="section-title">Apuração Atual</h2>
         <div class="dashboard-grid">
             
             <div class="card" style="border-left-color: var(--accent-color-1);">
@@ -453,8 +453,8 @@
                 <h2 class="card-title" style="--secondary-color: var(--accent-color-1);"><i class="fas fa-piggy-bank"></i>Saldo Total RoboForex</h2>
                 <div class="metric-group">
                     <span class="metric-label">Saldo em Dólar</span>
-                    <span class="metric-value" data-target="3938.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="3938.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value" data-key="saldo_total_roboforex" data-target="0">$ 0.00</span>
+                    <span class="metric-sub-value" data-key="saldo_total_roboforex" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
             </div>
             
@@ -462,9 +462,9 @@
                 <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-calculator"></i>Excedente Pró Labore</h2>
                 <div class="metric-group">
                     <span class="metric-label">Lucro Apurado (USD)</span>
-                    <span class="metric-value" data-target="938.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="938.00" data-calculate="usd-to-brl">R$ 0.00</span>
-                    <span class="metric-sub-value" style="font-size: 1rem; color: #a0a0a0; margin-top: 10px;">Base: $3.938,00 (Total) - $3.000,00 (Mínimo)</span>
+                    <span class="metric-value" data-key="excedente" data-target="0">$ 0.00</span>
+                    <span class="metric-sub-value" data-key="excedente" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-sub-value" style="font-size: 1rem; color: #a0a0a0; margin-top: 10px;">Base: <span data-key="saldo_total_roboforex" data-target="0">$0.00</span> (Total) - $3.000,00 (Mínimo)</span>
                 </div>
             </div>
 
@@ -472,13 +472,13 @@
                 <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-chart-pie"></i>Distribuição (50/50)</h2>
                 <div class="metric-group" style="margin-bottom: 20px;">
                     <span class="metric-label">Reinvestimento (50%)</span>
-                    <span class="metric-value green" data-target="469.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="469.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value green" data-key="reinvestimento" data-target="0">$ 0.00</span>
+                    <span class="metric-sub-value" data-key="reinvestimento" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
                  <div class="metric-group">
                     <span class="metric-label">Saque Sócios (50%)</span>
-                    <span class="metric-value blue" data-target="469.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="469.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value blue" data-key="saque_socios" data-target="0">$ 0.00</span>
+                    <span class="metric-sub-value" data-key="saque_socios" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
             </div>
 
@@ -486,8 +486,8 @@
                 <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-user-friends"></i>Pró Labore por Sócio (3)</h2>
                 <div class="metric-group">
                     <span class="metric-label">Valor por Sócio (USD)</span>
-                    <span class="metric-value" data-target="156.33">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="156.33" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value" data-key="pro_labore_socio" data-target="0">$ 0.00</span>
+                    <span class="metric-sub-value" data-key="pro_labore_socio" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
             </div>
             
@@ -507,7 +507,7 @@
             </div>
         </div>
 
-        <h2 class="section-title">Ganho Diário (27/Out)</h2>
+        <h2 class="section-title">Ganho Diário</h2>
         <div class="dashboard-grid">
             <div class="card card--daily-gain">
                 <h2 class="card-title"><i class="fas fa-money-bill-wave"></i>Total de Ganho no Dia</h2>
@@ -515,33 +515,33 @@
                     <ul>
                         <li>
                             <span class="label">ROBO RENDE MAIS</span>
-                            <span class="value-usd" data-target="0.00">$ 0.00</span>
-                            <span class="value-brl" data-target="0.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                            <span class="value-usd" data-key="ganho_diario_rende_mais" data-target="0">$ 0.00</span>
+                            <span class="value-brl" data-key="ganho_diario_rende_mais" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                         <li>
                             <span class="label">ROBO CANADA INTER</span>
-                            <span class="value-usd" data-target="15.06">$ 0.00</span>
-                            <span class="value-brl" data-target="15.06" data-calculate="usd-to-brl">R$ 0.00</span>
+                            <span class="value-usd" data-key="ganho_diario_inter" data-target="0">$ 0.00</span>
+                            <span class="value-brl" data-key="ganho_diario_inter" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                         <li>
                             <span class="label">ROBO SLOW</span>
-                            <span class="value-usd" data-target="9.87">$ 0.00</span>
-                            <span class="value-brl" data-target="9.87" data-calculate="usd-to-brl">R$ 0.00</span>
+                            <span class="value-usd" data-key="ganho_diario_slow" data-target="0">$ 0.00</span>
+                            <span class="value-brl" data-key="ganho_diario_slow" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                         <li>
                             <span class="label">ROBO 10%</span>
-                            <span class="value-usd" data-target="19.60">$ 0.00</span>
-                            <span class="value-brl" data-target="19.60" data-calculate="usd-to-brl">R$ 0.00</span>
+                            <span class="value-usd" data-key="ganho_diario_10" data-target="0">$ 0.00</span>
+                            <span class="value-brl" data-key="ganho_diario_10" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                         <li>
                             <span class="label">CONTA COPIADA</span>
-                            <span class="value-usd" data-target="19.97">$ 0.00</span>
-                            <span class="value-brl" data-target="19.97" data-calculate="usd-to-brl">R$ 0.00</span>
+                            <span class="value-usd" data-key="ganho_diario_copia" data-target="0">$ 0.00</span>
+                            <span class="value-brl" data-key="ganho_diario_copia" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                         <li class="total-row">
                             <span class="label">TOTAL</span>
-                            <span class="value-usd" data-target="64.50">$ 0.00</span>
-                            <span class="value-brl" data-target="64.50" data-calculate="usd-to-brl">R$ 0.00</span>
+                            <span class="value-usd" data-key="ganho_diario_total" data-target="0">$ 0.00</span>
+                            <span class="value-brl" data-key="ganho_diario_total" data-target="0" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                     </ul>
                 </div>
@@ -735,60 +735,67 @@
             }
         }
 
-        // --- [ATUALIZADO] LÓGICA PARA BUSCAR E ATUALIZAR DADOS DO GITHUB ---
-
         /**
-         * Busca os dados do arquivo CSV no GitHub e atualiza os cards.
+         * CORREÇÃO: Função para atualizar um elemento com base na sua data-key.
+         * Encontra todos os elementos com a mesma chave (ex: para USD e BRL) e define o data-target.
+         * @param {string} key A chave do dado (ex: "saldo_total_roboforex")
+         * @param {number} value O valor numérico a ser atribuído.
          */
+        function updateElementsByKey(key, value) {
+            const elements = document.querySelectorAll(`[data-key="${key}"]`);
+            elements.forEach(el => {
+                el.setAttribute('data-target', value.toFixed(2));
+            });
+        }
+
+
+        // --- LÓGICA PARA BUSCAR E ATUALIZAR DADOS DO GITHUB (CORRIGIDA) ---
         async function fetchAndUpdateData() {
             try {
-                const response = await fetch(dataUrl);
+                // Adicionamos um parâmetro para evitar cache do navegador
+                const response = await fetch(`${dataUrl}?v=${new Date().getTime()}`);
                 if (!response.ok) {
                     throw new Error(`Erro ao buscar dados: ${response.statusText}`);
                 }
                 const csvText = await response.text();
                 const data = parseCSV(csvText);
 
-                // --- 1. Atualiza os dados base com os valores do CSV ---
+                // --- 1. Lê os dados do CSV ---
                 const saldoTotal = parseFloat(data.saldo_total_roboforex) || 0;
                 const ganhoRendeMais = parseFloat(data.ganho_diario_rende_mais) || 0;
                 const ganhoInter = parseFloat(data.ganho_diario_inter) || 0;
                 const ganhoSlow = parseFloat(data.ganho_diario_slow) || 0;
                 const ganho10 = parseFloat(data.ganho_diario_10) || 0;
                 const ganhoCopia = parseFloat(data.ganho_diario_copia) || 0;
-                const ganhoDiarioTotal = ganhoRendeMais + ganhoInter + ganhoSlow + ganho10 + ganhoCopia;
 
                 // --- 2. Calcula os valores derivados ---
+                const ganhoDiarioTotal = ganhoRendeMais + ganhoInter + ganhoSlow + ganho10 + ganhoCopia;
                 const capitalMinimo = 3000.00;
                 const excedente = saldoTotal > capitalMinimo ? saldoTotal - capitalMinimo : 0;
                 const reinvestimento = excedente * 0.5;
                 const saqueSocios = excedente * 0.5;
                 const proLaborePorSocio = saqueSocios / 3;
 
-                // --- 3. Atualiza os atributos 'data-target' no HTML ---
-                // Card: Saldo Total RoboForex
-                document.querySelector('[data-target="3938.00"]').setAttribute('data-target', saldoTotal.toFixed(2));
+                // --- 3. Atualiza os atributos 'data-target' no HTML usando a nova função ---
+                updateElementsByKey('saldo_total_roboforex', saldoTotal);
+                updateElementsByKey('excedente', excedente);
+                updateElementsByKey('reinvestimento', reinvestimento);
+                updateElementsByKey('saque_socios', saqueSocios);
+                updateElementsByKey('pro_labore_socio', proLaborePorSocio);
                 
-                // Card: Excedente Pró Labore
-                document.querySelector('[data-target="938.00"]').setAttribute('data-target', excedente.toFixed(2));
-                
-                // Card: Distribuição
-                document.querySelectorAll('[data-target="469.00"]').forEach(el => el.setAttribute('data-target', reinvestimento.toFixed(2)));
-                
-                // Card: Pró Labore por Sócio
-                document.querySelector('[data-target="156.33"]').setAttribute('data-target', proLaborePorSocio.toFixed(2));
+                // Ganhos Diários
+                updateElementsByKey('ganho_diario_rende_mais', ganhoRendeMais);
+                updateElementsByKey('ganho_diario_inter', ganhoInter);
+                updateElementsByKey('ganho_diario_slow', ganhoSlow);
+                updateElementsByKey('ganho_diario_10', ganho10);
+                updateElementsByKey('ganho_diario_copia', ganhoCopia);
+                updateElementsByKey('ganho_diario_total', ganhoDiarioTotal);
 
-                // Card: Ganhos do Dia
-                document.querySelector('[data-target="0.00"]').setAttribute('data-target', ganhoRendeMais.toFixed(2));
-                document.querySelector('[data-target="15.06"]').setAttribute('data-target', ganhoInter.toFixed(2));
-                document.querySelector('[data-target="9.87"]').setAttribute('data-target', ganhoSlow.toFixed(2));
-                document.querySelector('[data-target="19.60"]').setAttribute('data-target', ganho10.toFixed(2));
-                document.querySelector('[data-target="19.97"]').setAttribute('data-target', ganhoCopia.toFixed(2));
-                document.querySelector('[data-target="64.50"]').setAttribute('data-target', ganhoDiarioTotal.toFixed(2));
 
             } catch (error) {
                 console.error("Falha ao carregar dados do GitHub:", error);
             } finally {
+                // Independente de sucesso ou falha, chama a função para animar os cards
                 updateCards();
             }
         }
@@ -798,15 +805,19 @@
          */
         function parseCSV(text) {
             const data = {};
-            const lines = text.split('\n').filter(line => line.trim() !== '');
-            lines.forEach(line => {
+            // Ignora linhas vazias ou que não contenham vírgula
+            const lines = text.split('\n').filter(line => line.trim() !== '' && line.includes(',')); 
+            
+            // Ignora a primeira linha (cabeçalho)
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i];
                 const parts = line.split(',');
                 if (parts.length === 2) {
                     const key = parts[0].trim();
                     const value = parts[1].trim();
                     data[key] = value;
                 }
-            });
+            }
             return data;
         }
 
