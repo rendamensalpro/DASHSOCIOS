@@ -410,8 +410,8 @@
             .table-container-title { font-size: 1.3rem; }
             .section-title { font-size: 1.5rem; }
             
-            .card--highlight .metric-value { font-size: 2.5rem; }
-            .card--highlight .metric-sub-value { font-size: 1.4rem; } 
+            .card--highlight .metric-value { font-size: 2.8rem; }
+            .card--highlight .metric-sub-value { font-size: 1.5rem; } /* Ajuste mobile */
 
             .card--daily-gain ul li {
                 grid-template-columns: 1fr auto auto; /* Ajuste para mobile */
@@ -420,29 +420,10 @@
 
         @media (max-width: 480px) {
             body { padding: 10px; }
-            .header h1 { font-size: 1.6rem; gap: 10px; }
-            .section-title { font-size: 1.3rem; }
+            .header h1 { font-size: 1.8rem; gap: 10px; }
             .card { padding: 20px; }
-            .card-title { font-size: 1.1rem; }
-            
-            .metric-value { font-size: 1.8rem; }
-            #dollar-rate-input { font-size: 1.8rem; }
-            .setting-input { font-size: 1.5rem; }
-            
-            .card--highlight .metric-value { font-size: 2.2rem; }
-            .card--highlight .metric-sub-value { font-size: 1.2rem; } 
-            
-            .card--daily-gain ul li { 
-                font-size: 0.9rem; 
-                grid-template-columns: 1fr auto auto; 
-                gap: 5px; 
-            }
-            .card--daily-gain ul li.total-row {
-                font-size: 1rem;
-            }
-
             .table-container { padding: 15px; }
-            th, td { padding: 8px 10px; font-size: 0.9rem; }
+            th, td { padding: 10px 12px; font-size: 0.95rem; }
         }
 
     </style>
@@ -472,8 +453,8 @@
                 <h2 class="card-title" style="--secondary-color: var(--accent-color-1);"><i class="fas fa-piggy-bank"></i>Saldo Total RoboForex</h2>
                 <div class="metric-group">
                     <span class="metric-label">Saldo em Dólar</span>
-                    <span class="metric-value" data-target="3960.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="3960.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value" data-target="3938.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="3938.00" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
             </div>
             
@@ -481,9 +462,9 @@
                 <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-calculator"></i>Excedente Pró Labore</h2>
                 <div class="metric-group">
                     <span class="metric-label">Lucro Apurado (USD)</span>
-                    <span class="metric-value" data-target="960.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="960.00" data-calculate="usd-to-brl">R$ 0.00</span>
-                    <span class="metric-sub-value" style="font-size: 1rem; color: #a0a0a0; margin-top: 10px;">Base: $3.960,00 (Total) - $3.000,00 (Mínimo)</span>
+                    <span class="metric-value" data-target="938.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="938.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-sub-value" style="font-size: 1rem; color: #a0a0a0; margin-top: 10px;">Base: $3.938,00 (Total) - $3.000,00 (Mínimo)</span>
                 </div>
             </div>
 
@@ -491,13 +472,13 @@
                 <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-chart-pie"></i>Distribuição (50/50)</h2>
                 <div class="metric-group" style="margin-bottom: 20px;">
                     <span class="metric-label">Reinvestimento (50%)</span>
-                    <span class="metric-value green" data-target="480.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="480.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value green" data-target="469.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="469.00" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
                  <div class="metric-group">
                     <span class="metric-label">Saque Sócios (50%)</span>
-                    <span class="metric-value blue" data-target="480.00">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="480.00" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value blue" data-target="469.00">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="469.00" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
             </div>
 
@@ -505,12 +486,26 @@
                 <h2 class="card-title" style="--secondary-color: var(--orange-color);"><i class="fas fa-user-friends"></i>Pró Labore por Sócio (3)</h2>
                 <div class="metric-group">
                     <span class="metric-label">Valor por Sócio (USD)</span>
-                    <span class="metric-value" data-target="160.33">$ 0.00</span>
-                    <span class="metric-sub-value" data-target="160.33" data-calculate="usd-to-brl">R$ 0.00</span>
+                    <span class="metric-value" data-target="156.33">$ 0.00</span>
+                    <span class="metric-sub-value" data-target="156.33" data-calculate="usd-to-brl">R$ 0.00</span>
                 </div>
             </div>
             
+            <div class="card" style="border-left-color: var(--green-color);">
+                <h2 class="card-title" style="--secondary-color: var(--green-color);">
+                    <i class="fas fa-sitemap"></i>Distribuição de Capital (Base)
+                </h2>
+                <div class="card-content">
+                    <ul>
+                        <li><span class="label">ROBO CANADA INT</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">ROBO CANADA SLOW</span> <span><span class="value" data-target="500">$0</span> <small data-target="500" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">ROBO CANADA 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li><span class="label">COPIA RO ROBO 10%</span> <span><span class="value" data-target="1000">$0</span> <small data-target="1000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                        <li style="background-color: #ffffff10; font-weight: bold;"><span class="label">Total Alocado</span> <span><span class="value green" data-target="3000">$0</span> <small data-target="3000" data-calculate="usd-to-brl">(R$ 0)</small></span></li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
         <h2 class="section-title">Ganho Diário (27/Out)</h2>
         <div class="dashboard-grid">
@@ -520,8 +515,8 @@
                     <ul>
                         <li>
                             <span class="label">ROBO RENDE MAIS</span>
-                            <span class="value-usd">$ -</span>
-                            <span class="value-brl">R$ -</span>
+                            <span class="value-usd" data-target="0.00">$ 0.00</span>
+                            <span class="value-brl" data-target="0.00" data-calculate="usd-to-brl">R$ 0.00</span>
                         </li>
                         <li>
                             <span class="label">ROBO CANADA INTER</span>
@@ -638,29 +633,22 @@
     </main>
 
     <script>
-        // --- FUNÇÕES DE FORMATAÇÃO E ANIMAÇÃO (Cards) ---
+        // --- URL DO SEU ARQUIVO DE DADOS NO GITHUB ---
+        const dataUrl = 'https://github.com/rendamensalpro/dashboard-data/raw/refs/heads/main/data.csv';
 
+        // --- FUNÇÕES DE FORMATAÇÃO E ANIMAÇÃO (Cards) ---
         const formatNumber = (value, element) => {
-            // Salva o placeholder (texto original) se for a primeira vez
             if (!element.dataset.placeholder) {
                  element.dataset.placeholder = element.textContent || '';
             }
             const placeholder = element.dataset.placeholder;
-            
             const calculation = element.getAttribute('data-calculate');
-            
-            // Decide o formato com base no placeholder
             const isSmallBRL = placeholder.includes('(R$');
             const isUSD = placeholder.includes('$');
-            // é BRL se for um cálculo USD->BRL OU se o placeholder tiver R$ (e não for (R$))
             const isBRL = (calculation === 'usd-to-brl') || (!isSmallBRL && !isUSD && placeholder.includes('R$'));
-
             const targetString = element.getAttribute('data-target') || '0';
             const isInteger = !targetString.includes('.');
-
             let options = {};
-
-            // Se for qualquer tipo de moeda, usa 2 casas decimais
             if (isBRL || isUSD || isSmallBRL || !isInteger) {
                 options.minimumFractionDigits = 2;
                 options.maximumFractionDigits = 2;
@@ -668,23 +656,17 @@
                 options.minimumFractionDigits = 0;
                 options.maximumFractionDigits = 0;
             }
-
             let formatted = value.toLocaleString('pt-BR', options);
-            
-            // Ordem de prioridade para evitar bugs
             if (isSmallBRL) return `(R$ ${formatted})`;
             if (isBRL) return `R$ ${formatted}`;
             if (isUSD) return `$ ${formatted}`;
-            
-            return formatted; // Para números sem símbolo
+            return formatted;
         };
 
         const animateValue = (element, start, end, duration) => {
-            // Armazena o texto original (ex: "R$ 0.00") no 'dataset.placeholder'
             if (!element.dataset.placeholder) {
                  element.dataset.placeholder = element.textContent || '';
             }
-            
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
@@ -699,109 +681,141 @@
             };
             window.requestAnimationFrame(step);
         };
-        
-        // --- FUNÇÃO PARA ATUALIZAR OS CARDS (Apuração Atual + Ganho Diário) ---
 
+        // --- FUNÇÃO PARA ATUALIZAR OS CARDS (Apuração Atual + Ganho Diário) ---
         function updateCards() {
             const dollarRate = parseFloat(document.getElementById('dollar-rate-input').value) || 0;
             const counters = document.querySelectorAll('[data-target]');
-            const animationDuration = 1000; // Duração da animação
-
+            const animationDuration = 1000;
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 const calculation = counter.getAttribute('data-calculate');
-                
-                let endValue = target; // Valor final padrão
-
-                // Se o elemento tiver 'data-calculate', recalcula o valor final
+                let endValue = target;
                 if (calculation === 'usd-to-brl') {
                     endValue = target * dollarRate;
                 }
-                
                 let startValue = 0;
-                // Tenta pegar o valor atual (já formatado) para uma animação suave
                 try {
-                     // Remove R$, $, (), espaços, e troca vírgula por ponto
                      const cleanText = counter.textContent.replace(/[R$() ]/g, '').replace(/\./g, '').replace(',', '.');
                      startValue = parseFloat(cleanText) || 0;
                      if(isNaN(startValue)) startValue = 0;
                 } catch(e) {
                     startValue = 0;
                 }
-                
                 animateValue(counter, startValue, endValue, animationDuration);
             });
         }
-        
+
         // --- FUNÇÃO PARA GERAR A TABELA DE PROJEÇÃO (36 Meses) ---
-        
         function generateProjectionTable() {
             const projectionBody = document.getElementById('projection-tbody');
-            if (!projectionBody) return; // Safety check
-            projectionBody.innerHTML = ''; // Limpa a tabela
-
-            // --- LÊ PARÂMETROS DOS INPUTS ---
+            if (!projectionBody) return;
+            projectionBody.innerHTML = '';
             let saldoInicial = parseFloat(document.getElementById('proj-saldo-inicial').value) || 10000;
             const rendimentoPerc = (parseFloat(document.getElementById('proj-rendimento').value) || 15) / 100;
             const numSocios = parseInt(document.getElementById('proj-socios').value) || 3;
-            const numMeses = 36; // **ALTERADO PARA 36 MESES**
-            const reinvestPerc = 0.50; // 50%
-            // ---------------------------------
-
-            // Atualiza headers da tabela
+            const numMeses = 36;
+            const reinvestPerc = 0.50;
             document.getElementById('th-rendimento').textContent = `Rendimento (${(rendimentoPerc * 100).toFixed(0)}%)`;
             document.getElementById('th-socios').textContent = `Salário p/ Sócio (${numSocios})`;
-
-            let currentDate = new Date('2025-11-15T12:00:00'); // Data inicial
+            let currentDate = new Date('2025-11-15T12:00:00');
             let saldo = saldoInicial;
-
-            const formatBRL = (value) => {
-                 return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
-            };
-
+            const formatBRL = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
             for (let i = 1; i <= numMeses; i++) {
-                // Lógica da nova planilha
                 const rendimento = saldo * rendimentoPerc;
-                const reinvestido = rendimento * reinvestPerc; // "Aporte 50%" da imagem
-                const saqueRobo = rendimento * (1 - reinvestPerc); // "SAQUE 50% DO ROBO"
-                const salarioSocio = numSocios > 0 ? (saqueRobo / numSocios) : 0; // "SAQUE SÓCIOS"
-                
-                // Lógica de Saldo Final (Saldo Inicial + Reinvestido)
+                const reinvestido = rendimento * reinvestPerc;
+                const saqueRobo = rendimento * (1 - reinvestPerc);
+                const salarioSocio = numSocios > 0 ? (saqueRobo / numSocios) : 0;
                 const saldoFinal = saldo + reinvestido;
-                
                 const formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                
-                const row = `
-                    <tr>
-                        <td>${i}</td>
-                        <td>${formattedDate}</td>
-                        <td>${formatBRL(saldo)}</td>
-                        <td>${formatBRL(rendimento)}</td>
-                        <td>${formatBRL(reinvestido)}</td>
-                        <td>${formatBRL(saqueRobo)}</td>
-                        <td class="positive">${formatBRL(salarioSocio)}</td>
-                        <td style="font-weight: bold;">${formatBRL(saldoFinal)}</td>
-                    </tr>
-                `;
-                
+                const row = `<tr><td>${i}</td><td>${formattedDate}</td><td>${formatBRL(saldo)}</td><td>${formatBRL(rendimento)}</td><td>${formatBRL(reinvestido)}</td><td>${formatBRL(saqueRobo)}</td><td class="positive">${formatBRL(salarioSocio)}</td><td style="font-weight: bold;">${formatBRL(saldoFinal)}</td></tr>`;
                 projectionBody.innerHTML += row;
-                
-                saldo = saldoFinal; // Prepara o saldo para o próximo mês
-                currentDate.setMonth(currentDate.getMonth() + 1); // Avança um mês
+                saldo = saldoFinal;
+                currentDate.setMonth(currentDate.getMonth() + 1);
             }
         }
 
+        // --- [ATUALIZADO] LÓGICA PARA BUSCAR E ATUALIZAR DADOS DO GITHUB ---
+
+        /**
+         * Busca os dados do arquivo CSV no GitHub e atualiza os cards.
+         */
+        async function fetchAndUpdateData() {
+            try {
+                const response = await fetch(dataUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro ao buscar dados: ${response.statusText}`);
+                }
+                const csvText = await response.text();
+                const data = parseCSV(csvText);
+
+                // --- 1. Atualiza os dados base com os valores do CSV ---
+                const saldoTotal = parseFloat(data.saldo_total_roboforex) || 0;
+                const ganhoRendeMais = parseFloat(data.ganho_diario_rende_mais) || 0;
+                const ganhoInter = parseFloat(data.ganho_diario_inter) || 0;
+                const ganhoSlow = parseFloat(data.ganho_diario_slow) || 0;
+                const ganho10 = parseFloat(data.ganho_diario_10) || 0;
+                const ganhoCopia = parseFloat(data.ganho_diario_copia) || 0;
+                const ganhoDiarioTotal = ganhoRendeMais + ganhoInter + ganhoSlow + ganho10 + ganhoCopia;
+
+                // --- 2. Calcula os valores derivados ---
+                const capitalMinimo = 3000.00;
+                const excedente = saldoTotal > capitalMinimo ? saldoTotal - capitalMinimo : 0;
+                const reinvestimento = excedente * 0.5;
+                const saqueSocios = excedente * 0.5;
+                const proLaborePorSocio = saqueSocios / 3;
+
+                // --- 3. Atualiza os atributos 'data-target' no HTML ---
+                // Card: Saldo Total RoboForex
+                document.querySelector('[data-target="3938.00"]').setAttribute('data-target', saldoTotal.toFixed(2));
+                
+                // Card: Excedente Pró Labore
+                document.querySelector('[data-target="938.00"]').setAttribute('data-target', excedente.toFixed(2));
+                
+                // Card: Distribuição
+                document.querySelectorAll('[data-target="469.00"]').forEach(el => el.setAttribute('data-target', reinvestimento.toFixed(2)));
+                
+                // Card: Pró Labore por Sócio
+                document.querySelector('[data-target="156.33"]').setAttribute('data-target', proLaborePorSocio.toFixed(2));
+
+                // Card: Ganhos do Dia
+                document.querySelector('[data-target="0.00"]').setAttribute('data-target', ganhoRendeMais.toFixed(2));
+                document.querySelector('[data-target="15.06"]').setAttribute('data-target', ganhoInter.toFixed(2));
+                document.querySelector('[data-target="9.87"]').setAttribute('data-target', ganhoSlow.toFixed(2));
+                document.querySelector('[data-target="19.60"]').setAttribute('data-target', ganho10.toFixed(2));
+                document.querySelector('[data-target="19.97"]').setAttribute('data-target', ganhoCopia.toFixed(2));
+                document.querySelector('[data-target="64.50"]').setAttribute('data-target', ganhoDiarioTotal.toFixed(2));
+
+            } catch (error) {
+                console.error("Falha ao carregar dados do GitHub:", error);
+            } finally {
+                updateCards();
+            }
+        }
+
+        /**
+         * Converte o texto de um CSV simples (chave,valor) para um objeto JavaScript.
+         */
+        function parseCSV(text) {
+            const data = {};
+            const lines = text.split('\n').filter(line => line.trim() !== '');
+            lines.forEach(line => {
+                const parts = line.split(',');
+                if (parts.length === 2) {
+                    const key = parts[0].trim();
+                    const value = parts[1].trim();
+                    data[key] = value;
+                }
+            });
+            return data;
+        }
+
         // --- INICIALIZAÇÃO DO DASHBOARD ---
-        
         document.addEventListener('DOMContentLoaded', () => {
-            generateProjectionTable(); // Gera a tabela de projeção com os defaults
-            updateCards(); // Calcula e anima os cards de apuração e ganhos diários
+            generateProjectionTable();
+            fetchAndUpdateData();
         });
     </script>
 
 </body>
 </html>
-
-
-
-
