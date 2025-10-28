@@ -634,7 +634,7 @@
 
     <script>
         // --- URL DO SEU ARQUIVO DE DADOS NO GITHUB ---
-        const dataUrl = 'https://github.com/rendamensalpro/dashboard-data/raw/refs/heads/main/data.csv';
+        const dataUrl = 'https://raw.githubusercontent.com/rendamensalpro/dashboard-data/main/data.csv';
 
         // --- FUNÇÕES DE FORMATAÇÃO E ANIMAÇÃO (Cards) ---
         const formatNumber = (value, element) => {
@@ -708,38 +708,40 @@
 
         // --- FUNÇÃO PARA GERAR A TABELA DE PROJEÇÃO (36 Meses) ---
         function generateProjectionTable() {
-            const projectionBody = document.getElementById('projection-tbody');
-            if (!projectionBody) return;
-            projectionBody.innerHTML = '';
-            let saldoInicial = parseFloat(document.getElementById('proj-saldo-inicial').value) || 10000;
-            const rendimentoPerc = (parseFloat(document.getElementById('proj-rendimento').value) || 15) / 100;
-            const numSocios = parseInt(document.getElementById('proj-socios').value) || 3;
-            const numMeses = 36;
-            const reinvestPerc = 0.50;
-            document.getElementById('th-rendimento').textContent = `Rendimento (${(rendimentoPerc * 100).toFixed(0)}%)`;
-            document.getElementById('th-socios').textContent = `Salário p/ Sócio (${numSocios})`;
-            let currentDate = new Date('2025-11-15T12:00:00');
-            let saldo = saldoInicial;
-            const formatBRL = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
-            for (let i = 1; i <= numMeses; i++) {
-                const rendimento = saldo * rendimentoPerc;
-                const reinvestido = rendimento * reinvestPerc;
-                const saqueRobo = rendimento * (1 - reinvestPerc);
-                const salarioSocio = numSocios > 0 ? (saqueRobo / numSocios) : 0;
-                const saldoFinal = saldo + reinvestido;
-                const formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                const row = `<tr><td>${i}</td><td>${formattedDate}</td><td>${formatBRL(saldo)}</td><td>${formatBRL(rendimento)}</td><td>${formatBRL(reinvestido)}</td><td>${formatBRL(saqueRobo)}</td><td class="positive">${formatBRL(salarioSocio)}</td><td style="font-weight: bold;">${formatBRL(saldoFinal)}</td></tr>`;
-                projectionBody.innerHTML += row;
-                saldo = saldoFinal;
-                currentDate.setMonth(currentDate.getMonth() + 1);
+            try {
+                const projectionBody = document.getElementById('projection-tbody');
+                if (!projectionBody) return;
+                projectionBody.innerHTML = '';
+                let saldoInicial = parseFloat(document.getElementById('proj-saldo-inicial').value) || 10000;
+                const rendimentoPerc = (parseFloat(document.getElementById('proj-rendimento').value) || 15) / 100;
+                const numSocios = parseInt(document.getElementById('proj-socios').value) || 3;
+                const numMeses = 36;
+                const reinvestPerc = 0.50;
+                document.getElementById('th-rendimento').textContent = `Rendimento (${(rendimentoPerc * 100).toFixed(0)}%)`;
+                document.getElementById('th-socios').textContent = `Salário p/ Sócio (${numSocios})`;
+                let currentDate = new Date('2025-11-15T12:00:00');
+                let saldo = saldoInicial;
+                const formatBRL = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+                for (let i = 1; i <= numMeses; i++) {
+                    const rendimento = saldo * rendimentoPerc;
+                    const reinvestido = rendimento * reinvestPerc;
+                    const saqueRobo = rendimento * (1 - reinvestPerc);
+                    const salarioSocio = numSocios > 0 ? (saqueRobo / numSocios) : 0;
+                    const saldoFinal = saldo + reinvestido;
+                    // CORREÇÃO DO ERRO DE DIGITAÇÃO AQUI
+                    const formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                    const row = `<tr><td>${i}</td><td>${formattedDate}</td><td>${formatBRL(saldo)}</td><td>${formatBRL(rendimento)}</td><td>${formatBRL(reinvestido)}</td><td>${formatBRL(saqueRobo)}</td><td class="positive">${formatBRL(salarioSocio)}</td><td style="font-weight: bold;">${formatBRL(saldoFinal)}</td></tr>`;
+                    projectionBody.innerHTML += row;
+                    saldo = saldoFinal;
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                }
+            } catch (error) {
+                console.error("Erro ao gerar tabela de projeção:", error);
             }
         }
 
         /**
-         * CORREÇÃO: Função para atualizar um elemento com base na sua data-key.
-         * Encontra todos os elementos com a mesma chave (ex: para USD e BRL) e define o data-target.
-         * @param {string} key A chave do dado (ex: "saldo_total_roboforex")
-         * @param {number} value O valor numérico a ser atribuído.
+         * Função para atualizar um elemento com base na sua data-key.
          */
         function updateElementsByKey(key, value) {
             const elements = document.querySelectorAll(`[data-key="${key}"]`);
@@ -749,10 +751,9 @@
         }
 
 
-        // --- LÓGICA PARA BUSCAR E ATUALIZAR DADOS DO GITHUB (CORRIGIDA) ---
+        // --- LÓGICA PARA BUSCAR E ATUALIZAR DADOS DO GITHUB ---
         async function fetchAndUpdateData() {
             try {
-                // Adicionamos um parâmetro para evitar cache do navegador
                 const response = await fetch(`${dataUrl}?v=${new Date().getTime()}`);
                 if (!response.ok) {
                     throw new Error(`Erro ao buscar dados: ${response.statusText}`);
@@ -776,7 +777,7 @@
                 const saqueSocios = excedente * 0.5;
                 const proLaborePorSocio = saqueSocios / 3;
 
-                // --- 3. Atualiza os atributos 'data-target' no HTML usando a nova função ---
+                // --- 3. Atualiza os atributos 'data-target' no HTML ---
                 updateElementsByKey('saldo_total_roboforex', saldoTotal);
                 updateElementsByKey('excedente', excedente);
                 updateElementsByKey('reinvestimento', reinvestimento);
@@ -795,7 +796,6 @@
             } catch (error) {
                 console.error("Falha ao carregar dados do GitHub:", error);
             } finally {
-                // Independente de sucesso ou falha, chama a função para animar os cards
                 updateCards();
             }
         }
@@ -805,10 +805,8 @@
          */
         function parseCSV(text) {
             const data = {};
-            // Ignora linhas vazias ou que não contenham vírgula
             const lines = text.split('\n').filter(line => line.trim() !== '' && line.includes(',')); 
             
-            // Ignora a primeira linha (cabeçalho)
             for (let i = 1; i < lines.length; i++) {
                 const line = lines[i];
                 const parts = line.split(',');
