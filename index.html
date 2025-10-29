@@ -633,8 +633,8 @@
     </main>
 
     <script>
-        // --- URL DO SEU ARQUIVO DE DADOS NO GITHUB ---
-        const dataUrl = 'https://github.com/rendamensalpro/dashboard-data/raw/refs/heads/main/data.csv';
+        // --- URL APONTANDO PARA O ARQUIVO LOCAL ---
+        const dataUrl = 'data.csv';
 
         // --- FUNÇÕES DE FORMATAÇÃO E ANIMAÇÃO (Cards) ---
         const formatNumber = (value, element) => {
@@ -682,7 +682,7 @@
             window.requestAnimationFrame(step);
         };
 
-        // --- FUNÇÃO PARA ATUALIZAR OS CARDS (Apuração Atual + Ganho Diário) ---
+        // --- FUNÇÃO PARA ATUALIZAR OS CARDS ---
         function updateCards() {
             const dollarRate = parseFloat(document.getElementById('dollar-rate-input').value) || 0;
             const counters = document.querySelectorAll('[data-target]');
@@ -706,7 +706,7 @@
             });
         }
 
-        // --- FUNÇÃO PARA GERAR A TABELA DE PROJEÇÃO (36 Meses) ---
+        // --- FUNÇÃO PARA GERAR A TABELA DE PROJEÇÃO ---
         function generateProjectionTable() {
             try {
                 const projectionBody = document.getElementById('projection-tbody');
@@ -728,7 +728,6 @@
                     const saqueRobo = rendimento * (1 - reinvestPerc);
                     const salarioSocio = numSocios > 0 ? (saqueRobo / numSocios) : 0;
                     const saldoFinal = saldo + reinvestido;
-                    // CORREÇÃO DO ERRO DE DIGITAÇÃO AQUI
                     const formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
                     const row = `<tr><td>${i}</td><td>${formattedDate}</td><td>${formatBRL(saldo)}</td><td>${formatBRL(rendimento)}</td><td>${formatBRL(reinvestido)}</td><td>${formatBRL(saqueRobo)}</td><td class="positive">${formatBRL(salarioSocio)}</td><td style="font-weight: bold;">${formatBRL(saldoFinal)}</td></tr>`;
                     projectionBody.innerHTML += row;
@@ -750,10 +749,29 @@
             });
         }
 
+        /**
+         * Converte o texto de um CSV (chave,valor) para um objeto JavaScript.
+         */
+        function parseCSV(text) {
+            const data = {};
+            const lines = text.split('\n').filter(line => line.trim() !== '' && line.includes(','));
+            
+            // CORREÇÃO: Itera por TODAS as linhas, pois não há cabeçalho.
+            lines.forEach(line => {
+                const parts = line.split(',');
+                if (parts.length === 2) {
+                    const key = parts[0].trim();
+                    const value = parts[1].trim();
+                    data[key] = value;
+                }
+            });
+            return data;
+        }
 
-        // --- LÓGICA PARA BUSCAR E ATUALIZAR DADOS DO GITHUB ---
+        // --- LÓGICA PARA BUSCAR E ATUALIZAR DADOS ---
         async function fetchAndUpdateData() {
             try {
+                // Adiciona um parâmetro para evitar cache
                 const response = await fetch(`${dataUrl}?v=${new Date().getTime()}`);
                 if (!response.ok) {
                     throw new Error(`Erro ao buscar dados: ${response.statusText}`);
@@ -794,30 +812,13 @@
 
 
             } catch (error) {
-                console.error("Falha ao carregar dados do GitHub:", error);
+                console.error("Falha ao carregar dados locais:", error);
+                alert("Não foi possível carregar o arquivo data.csv. Verifique se o arquivo está na mesma pasta do index.html e se você está usando um servidor local.");
             } finally {
                 updateCards();
             }
         }
 
-        /**
-         * Converte o texto de um CSV simples (chave,valor) para um objeto JavaScript.
-         */
-        function parseCSV(text) {
-            const data = {};
-            const lines = text.split('\n').filter(line => line.trim() !== '' && line.includes(',')); 
-            
-            for (let i = 1; i < lines.length; i++) {
-                const line = lines[i];
-                const parts = line.split(',');
-                if (parts.length === 2) {
-                    const key = parts[0].trim();
-                    const value = parts[1].trim();
-                    data[key] = value;
-                }
-            }
-            return data;
-        }
 
         // --- INICIALIZAÇÃO DO DASHBOARD ---
         document.addEventListener('DOMContentLoaded', () => {
